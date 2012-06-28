@@ -7,7 +7,7 @@ import java.util.Map;
 
 class AesockIO {
 
-	public static String WRITE_DIR = "/tmp/"; 
+	public static final String WRITE_DIR = "/tmp/"; 
 
 	static String calculateHash (String username) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
