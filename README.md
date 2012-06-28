@@ -5,7 +5,8 @@ _Telephone tag for the 21st century_
 
 # History
 
-Aesock is the result of years of cutting-edge research in the field of advanced cryptography and communicography. It's more badass than Chuck Norris debugging a MIPS assembler with a [http://xkcd.com/378/](steady hand and a magnetized needle).
+Aesock is the result of years of cutting-edge research in the field of advanced cryptography and communicography.
+It's more badass than Chuck Norris debugging a MIPS assembler with a (http://xkcd.com/378/)[steady hand and a magnetized needle].
 
 # Name
 
