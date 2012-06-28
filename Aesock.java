@@ -4,7 +4,6 @@ import java.util.List;
 class Aesock {
 
 	public static void main (String[] args) {
-
 		// Check for help flags, and display usage
 		// if any were found.
 		for (String help_opt : Arrays.asList("-h", "--help")) {
@@ -39,17 +38,14 @@ class Aesock {
 	}
 
 	static void readMessages(String from) {
-
 		System.out.println("Will read messages from user: " + from);
 	}
 
 	static void writeMessage(String to, String message) {
-
 		System.out.println("Will write message \"" + message +"\" to user: " + to);
 	}
 
 	static void usage () {
-
 		System.out.println("Usage:");
 		System.out.println("    -h, --help\t\t\t Displays this help text.");
 		System.out.println("    aesock <usr>\t\t Reads messages from user <usr>.");
