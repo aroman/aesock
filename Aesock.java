@@ -37,6 +37,8 @@ class Aesock {
 				writeMessage(args[0], message.toString());
 				break;
 		}
+		// Assume everything went okay; exit cleanly.
+		System.exit(0);
 	}
 
 	static void readMessages(String from) {
@@ -45,7 +47,8 @@ class Aesock {
 			System.out.println("Messages from " + asBold(from) + ":");
 			System.out.println(messages);
 		} catch (Exception e) {
-			System.out.println("Failed to read messages.");
+			System.out.println("Failed to read messages: ");
+			System.out.println(e.getMessage());
 			System.exit(1);
 		}
 	}
@@ -55,7 +58,8 @@ class Aesock {
 			AesockIO.write(username, to, message);
 			System.out.println("Message written to " + asBold(to) + ".");
 		} catch (Exception e) {
-			System.out.println("Failed to write message.");
+			System.out.println("Failed to write message: ");
+			System.out.println(e.getMessage());
 			System.exit(1);
 		}
 	}

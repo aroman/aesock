@@ -17,8 +17,46 @@ class AesockIO {
 		return new BigInteger(1, digest).toString(16);
 	}
 
+	static String charToHex (char c) {
+		// Dear Java,
+		// Please ditch your type primitives.
+		// Love,
+		// Everyone
+
+		// return Integer.toString(Character.digit(c, 2));
+		return "";
+	}
+
 	static String getFilePathForUser (String user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		return WRITE_DIR + calculateHash(user) + ".aes";
+	}
+
+	// This would work great, except that the XOR'd value
+	// sometimes falls out of range of ASCII, meaning it's un-reversable
+	// for all intents and purposes.
+	// static String XORLikeABoss (String salt, String str) {
+	// 	StringBuilder sb = new StringBuilder();
+	// 	for (int i = 0, j = 0; i < str.length(); i++, j++) {
+	// 		if (j == salt.length()) {
+	// 			j = 0;
+	// 		}
+	// 		System.out.println("Old: " + salt.charAt(j) + "  New: " + str.charAt(i));
+	// 	    sb.append((char) (salt.getBytes()[j] ^ str.getBytes()[i]));
+	//     }
+	// 	return sb.toString();
+	// }
+
+	static String superAdvancedTwoWayCipherFunction (String str) {
+		StringBuilder sb = new StringBuilder ();
+		for (int i = 0; i < str.length(); i++) {
+		    char c = str.charAt(i);
+		    if       (c >= 'a' && c <= 'm') c += 13;
+		    else if  (c >= 'n' && c <= 'z') c -= 13;
+		    else if  (c >= 'A' && c <= 'M') c += 13;
+		    else if  (c >= 'A' && c <= 'Z') c -= 13;
+		    sb.append(c);
+		}
+		return sb.toString();
 	}
 
 	public static String read (String from) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
@@ -29,34 +67,14 @@ class AesockIO {
 		    messages.append(str + "\n");
 		}
 		in.close();
-		return messages.toString();
-	}
-
-	public static void XORLikeABoss (String salt, String str) {
-		StringBuilder sb = new StringBuilder();
-		for (int i=0; i < str.length(); i++)
-		    sb.append((char)(salt.charAt(i) ^ str.charAt(i)));
-		String result = sb.toString();
+		return superAdvancedTwoWayCipherFunction(messages.toString());
 	}
 
 	public static void write (String from, String to, String msg) throws IOException, NoSuchAlgorithmException {
-		// Serialize to JSON
-
-		Map<String, String> map = new HashMap<String, String>();
-	    map.put("", "value1");
-	    map.put("key2", "value2");
-	    map.put("key3", "value3");
-
-		String json = new Gson().toJson(map);
-
-		System.out.println(json);
-
-		System.out.println("foobar" ^ "My message");
-
 		// Open the file in append mode.
 		FileWriter fstream = new FileWriter(getFilePathForUser(to), true);
 		BufferedWriter out = new BufferedWriter(fstream);
-		out.write("\n" + msg);
+		out.write("\n" + superAdvancedTwoWayCipherFunction(msg));
 		out.close();
 	}
 }
