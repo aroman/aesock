@@ -42,7 +42,7 @@ class Aesock {
 	static void readMessages(String from) {
 		try {
 			String messages = AesockIO.read(from);
-			System.out.println("Messages from " + from + ":");
+			System.out.println("Messages from " + asBold(from) + ":");
 			System.out.println(messages);
 		} catch (Exception e) {
 			System.out.println("Failed to read messages.");
@@ -53,11 +53,15 @@ class Aesock {
 	static void writeMessage(String to, String message) {
 		try {
 			AesockIO.write(username, to, message);
-			System.out.println("Message written successfully.");
+			System.out.println("Message written to " + asBold(to) + ".");
 		} catch (Exception e) {
 			System.out.println("Failed to write message.");
 			System.exit(1);
 		}
+	}
+
+	static String asBold (String str) {
+		return "\033[1m" + str + "\033[0m";
 	}
 
 	static void usage () {
