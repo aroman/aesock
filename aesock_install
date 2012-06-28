@@ -1,0 +1,4 @@
+echo "alias aesock='/tmp/aesock'" >> ~/.bashrc 
+echo "\033[1;32m>>\033[0m Hellz yeah, Aesock is installed like a \033[33mBAWS\033[0m."
+echo "\033[1;32m>>\033[0m To run it, just type in \`\033[1maesock\033[0m\` at your prompt."
+echo "\033[1;32m>>\033[0m Kthxbye \033[31m<3\033[0m"
