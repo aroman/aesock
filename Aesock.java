@@ -2,6 +2,9 @@ import java.util.Arrays;
 import java.util.List;
 
 class Aesock {
+
+	AesockWriter writer = new AesockWriter ();
+
 	public static void main (String[] args) {
 
 		if (args.length == 0)
@@ -13,10 +16,16 @@ class Aesock {
 				break;
 			}
 		}
+
+		String recipient = args[0];
+		writer.write(
 	}
 
 	static void usage () {
+
 		System.out.println("Usage:");
-		System.out.println("    aesock <userr>\t\t Leaves a message for user <user>.");
+		System.out.println("    aesock <user>\t\t Leaves a message for user <user>.");
+		System.exit(0);
 	}
+
 }
