@@ -40,13 +40,20 @@ class Aesock {
 	}
 
 	static void readMessages(String from) {
-		System.out.println("Will read messages from user: " + from);
+		try {
+			String messages = AesockIO.read(from);
+			System.out.println("Messages from " + from + ":");
+			System.out.println(messages);
+		} catch (Exception e) {
+			System.out.println("Failed to read messages.");
+			System.exit(1);
+		}
 	}
 
 	static void writeMessage(String to, String message) {
-		// System.out.println("Will write message \"" + message +"\" to user: " + to);
 		try {
 			AesockIO.write(username, to, message);
+			System.out.println("Message written successfully.");
 		} catch (Exception e) {
 			System.out.println("Failed to write message.");
 			System.exit(1);

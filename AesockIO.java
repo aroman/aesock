@@ -14,15 +14,26 @@ class AesockIO {
 		return new BigInteger(1, digest).toString(16);
 	}
 
-	public static String[] read (String from) {
-		return new String[] {};
+	static String getFilePathForUser (String user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		return WRITE_DIR + calculateHash(user) + ".aes";
+	}
+
+	public static String read (String from) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
+		StringBuilder messages = new StringBuilder();
+		String str;
+		BufferedReader in = new BufferedReader(new FileReader(getFilePathForUser(from)));
+		while ((str = in.readLine()) != null) {
+		    messages.append(str + "\n");
+		}
+		in.close();
+		return messages.toString();
 	}
 
 	public static void write (String from, String to, String msg) throws IOException, NoSuchAlgorithmException {
-		System.out.println("Will write to " + to + " from " + from);
-		FileWriter fstream = new FileWriter(WRITE_DIR + calculateHash(to) + ".aes");
+		// Open the file in append mode.
+		FileWriter fstream = new FileWriter(getFilePathForUser(to), true);
 		BufferedWriter out = new BufferedWriter(fstream);
-		out.write(msg);
+		out.write("\n" + msg);
 		out.close();
 	}
 }
