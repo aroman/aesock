@@ -3,13 +3,10 @@ import java.util.List;
 
 class Aesock {
 
-	static AesockWriter writer;
-
 	public static void main (String[] args) {
 
-		if (args.length == 0)
-			usage();
-
+		// Check for help flags, and display usage
+		// if any were found.
 		for (String help_opt : Arrays.asList("-h", "--help")) {
 			if (Arrays.asList(args).indexOf(help_opt) != -1) {
 				usage();
@@ -17,13 +14,38 @@ class Aesock {
 			}
 		}
 
-		String recipient = args[0];
-		writer = new AesockWriter (recipient);
-		try {
-			writer.write("johnny", "Hello!");
-		} catch (Exception e) {
-			System.out.println("Something dun goofed.");
+		switch (args.length) {
+			case 0:
+				usage();
+				break;
+			case 1:
+				readMessages(args[0]);
+				break;
+			default:
+				// Stitch together all subsequent args into an Array
+				// containing the message content.
+				String[] message_chunks = Arrays.copyOfRange(args, 0, args.length);
+				StringBuilder message = new StringBuilder();
+				for (int i = 0; i < message_chunks.length; i++) {
+					message.append(message_chunks[i]);
+					// Only append a space if this isn't the last iteration.
+					if (i < (message_chunks.length - 1)) {
+						message.append(" ");
+					}
+				}
+				writeMessage(args[0], message.toString());
+				break;
 		}
+	}
+
+	static void readMessages(String from) {
+
+		System.out.println("Will read messages from user: " + from);
+	}
+
+	static void writeMessage(String to, String message) {
+
+		System.out.println("Will write message \"" + message +"\" to user: " + to);
 	}
 
 	static void usage () {
