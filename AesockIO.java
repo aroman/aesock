@@ -14,8 +14,12 @@ class AesockIO {
 		return new BigInteger(1, digest).toString(16);
 	}
 
+	public String[] read (String from) {
+		return new String[] {};
+	}
+
 	public void write (String from, String to, String msg) throws IOException, NoSuchAlgorithmException {
-		System.out.println("Will write to " + sender + " from " + to);
+		System.out.println("Will write to " + to + " from " + from);
 		FileWriter fstream = new FileWriter(WRITE_DIR + calculateHash(to) + ".aes");
 		BufferedWriter out = new BufferedWriter(fstream);
 		out.write(msg);
