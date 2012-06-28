@@ -51,7 +51,9 @@ class Aesock {
 	static void usage () {
 
 		System.out.println("Usage:");
-		System.out.println("    aesock <user>\t\t Leaves a message for user <user>.");
+		System.out.println("    -h, --help\t\t\t Displays this help text.");
+		System.out.println("    aesock <usr>\t\t Reads messages from user <usr>.");
+		System.out.println("    aesock <usr> <msg>\t\t Sends message <msg> to user <usr>.");
 		System.exit(0);
 	}
 
