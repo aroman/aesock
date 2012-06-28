@@ -3,6 +3,8 @@ import java.util.List;
 
 class Aesock {
 
+	static String username = System.getProperty("user.name");
+
 	public static void main (String[] args) {
 		// Check for help flags, and display usage
 		// if any were found.
@@ -23,7 +25,7 @@ class Aesock {
 			default:
 				// Stitch together all subsequent args into an Array
 				// containing the message content.
-				String[] message_chunks = Arrays.copyOfRange(args, 0, args.length);
+				String[] message_chunks = Arrays.copyOfRange(args, 1, args.length);
 				StringBuilder message = new StringBuilder();
 				for (int i = 0; i < message_chunks.length; i++) {
 					message.append(message_chunks[i]);
@@ -42,7 +44,13 @@ class Aesock {
 	}
 
 	static void writeMessage(String to, String message) {
-		System.out.println("Will write message \"" + message +"\" to user: " + to);
+		// System.out.println("Will write message \"" + message +"\" to user: " + to);
+		try {
+			AesockIO.write(username, to, message);
+		} catch (Exception e) {
+			System.out.println("Failed to write message.");
+			System.exit(1);
+		}
 	}
 
 	static void usage () {

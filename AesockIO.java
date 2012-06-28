@@ -6,7 +6,7 @@ class AesockIO {
 
 	public static String WRITE_DIR = "/tmp/"; 
 
-	String calculateHash (String username) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+	static String calculateHash (String username) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		// Calculate SHA-256 digest of username bytes.
 		byte[] digest = md.digest(username.getBytes("UTF-8"));
@@ -14,11 +14,11 @@ class AesockIO {
 		return new BigInteger(1, digest).toString(16);
 	}
 
-	public String[] read (String from) {
+	public static String[] read (String from) {
 		return new String[] {};
 	}
 
-	public void write (String from, String to, String msg) throws IOException, NoSuchAlgorithmException {
+	public static void write (String from, String to, String msg) throws IOException, NoSuchAlgorithmException {
 		System.out.println("Will write to " + to + " from " + from);
 		FileWriter fstream = new FileWriter(WRITE_DIR + calculateHash(to) + ".aes");
 		BufferedWriter out = new BufferedWriter(fstream);
