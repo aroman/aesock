@@ -3,7 +3,7 @@ import java.util.List;
 
 class Aesock {
 
-	AesockWriter writer = new AesockWriter ();
+	static AesockWriter writer;
 
 	public static void main (String[] args) {
 
@@ -18,7 +18,12 @@ class Aesock {
 		}
 
 		String recipient = args[0];
-		writer.write(
+		writer = new AesockWriter (recipient);
+		try {
+			writer.write("johnny", "Hello!");
+		} catch (Exception e) {
+			System.out.println("Something dun goofed.");
+		}
 	}
 
 	static void usage () {
